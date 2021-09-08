@@ -4,7 +4,9 @@
 
 生成文件应当在`项目目录/dist/`下。
 
-目前只能保证编译出的exe文件可运行，尚未配上gdk-pixbuf和gsettings相关文件。
+不包含对gsettings文件及主题的处理。
+
+请至少准备30G硬盘空间来打包这个容器。
 
 # 运行示范
 
@@ -25,3 +27,5 @@ podman run -v $PWD/mygtk:/app cross-build
 ```bash
 podman run -v $PWD/mygtk:/app -e RELEASE=debug cross-build
 ```
+
+另外建议使用`-v cargo-cache:/root`的方法进行缓存。也可以更精细地对`/root/.cargo`、`/root/.rustup`、`/root/.cache`进行控制。
