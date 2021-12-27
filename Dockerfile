@@ -5,8 +5,8 @@ RUN sed -i '1iServer = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$
 RUN echo -e "\nSigLevel = Never" >> /etc/pacman.conf
 RUN echo -e "\n[mingw64]\nInclude = /etc/pacman.d/mirrorlist.mingw" >> /etc/pacman.conf
 RUN echo -e "\n[msys]\nInclude = /etc/pacman.d/mirrorlist.msys" >> /etc/pacman.conf
-RUN echo -e "Server = https://mirrors.sjtug.sjtu.edu.cn/msys2/msys/\$arch/" > /etc/pacman.d/mirrorlist.msys
-RUN echo -e "Server = https://mirrors.sjtug.sjtu.edu.cn/msys2/mingw/\$repo" > /etc/pacman.d/mirrorlist.mingw
+RUN echo -e "Server = https://repo.msys2.org/msys/\$arch/" > /etc/pacman.d/mirrorlist.msys
+RUN echo -e "Server = https://repo.msys2.org/mingw/\$repo" > /etc/pacman.d/mirrorlist.mingw
 
 # Add multilib repository for wine
 RUN echo -e "\n[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
