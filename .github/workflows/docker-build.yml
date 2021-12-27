@@ -1,0 +1,22 @@
+name: 'docker-build'
+
+on:
+  push:
+    branches:
+  repository_dispatch:
+
+jobs:
+  build:
+    name: 'Build'
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Build:checkout"
+        uses: actions/checkout@v2
+      - name: 'Build:dockerimage'
+        uses: docker/build-push-action@v1
+        with:
+          registry: ghcr.io
+          username: "135e2"
+          password: ${{ secrets.GITHUB_TOKEN }}
+          repository: 135e2/mingw-gtk-docker
+          tags: latest

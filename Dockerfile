@@ -14,14 +14,11 @@ RUN echo -e "\n[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.co
 RUN pacman -Sy --noconfirm
 
 # Install rust and mingw and mingw_ldd
-RUN pacman -S --noconfirm rustup gcc pkgconf
-RUN pacman -S --noconfirm mingw-w64-gcc mingw-w64-x86_64-gtk4
+RUN pacman -S --noconfirm go gcc pkgconf
+RUN pacman -S --noconfirm mingw-w64-gcc mingw-w64-x86_64-gtk3
 RUN pacman -S --noconfirm python-pip wine
 
-ENV RUSTUP_UPDATE_ROOT=https://mirrors.sjtug.sjtu.edu.cn/rust-static/rustup
-ENV RUSTUP_DIST_SERVER=https://mirrors.sjtug.sjtu.edu.cn/rust-static
-RUN rustup install stable 
-RUN rustup target add x86_64-pc-windows-gnu
+
 
 RUN pip install -i https://mirrors.sjtug.sjtu.edu.cn/pypi/web/simple mingw_ldd
 
@@ -29,8 +26,11 @@ RUN pip install -i https://mirrors.sjtug.sjtu.edu.cn/pypi/web/simple mingw_ldd
 ENV PKG_CONFIG_SYSROOT_DIR=/mingw64
 ENV PKG_CONFIG_PATH=/mingw64/lib/pkgconfig
 ENV RELEASE=release
+ENV PATH=/go/bin:$PATH \
+    CGO_ENABLED=1 \
+    GOOS=windows
 COPY script.sh .
 RUN chmod u+x script.sh
-RUN mkdir /app
-WORKDIR /app
+RUN mkdir /src
+WORKDIR /src
 CMD /script.sh
