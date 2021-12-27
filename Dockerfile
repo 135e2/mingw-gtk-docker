@@ -29,8 +29,6 @@ ENV RELEASE=release
 ENV PATH=/go/bin:$PATH \
     CGO_ENABLED=1 \
     GOOS=windows
-COPY script.sh .
-RUN chmod u+x script.sh
 RUN mkdir /src
 WORKDIR /src
-CMD /script.sh
+
