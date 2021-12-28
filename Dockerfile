@@ -15,7 +15,7 @@ RUN pacman -Sy --noconfirm
 
 # Install rust and mingw and mingw_ldd
 RUN pacman -S --noconfirm go gcc pkgconf
-RUN pacman -S --noconfirm mingw-w64-gcc mingw-w64-x86_64-gtk3
+RUN pacman -S --noconfirm mingw-w64-gcc mingw-w64-x86_64-gtk3 mingw-w64-x86_64-libffi mingw-w64-x86_64-libgit2-glib mingw-w64-x86_64-jasper
 RUN pacman -S --noconfirm python-pip wine
 
 
